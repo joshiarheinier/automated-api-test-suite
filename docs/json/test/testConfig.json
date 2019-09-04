@@ -1,0 +1,31 @@
+{
+  "config_name": "API Test Cases",
+  "hostname": "",
+  "port": "",
+  "schema": [
+    {
+      "test_title": "TestSampleSuccess",
+      "jobs": [
+        {
+          "test_name": "sampleSuccess",
+          "url": "/path/to/api",
+          "method": "POST",
+          "params": {
+            "foo": "bar"
+          },
+          "header": {
+            "foo": "bar"
+          },
+          "body": {
+            "foo": "bar"
+          },
+          "save_keys": [],
+          "expected": {
+            "response_status": "",
+            "body": {}
+          }
+        }
+      ]
+    }
+  ]
+}
