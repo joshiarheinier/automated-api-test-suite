@@ -1,0 +1,26 @@
+{
+  "config_name": "",
+  "hostname": "",
+  "port": "",
+  "schema": [
+    {
+      "test_title": "",
+      "jobs": [
+        {
+          "test_name": "",
+          "try": 0,
+          "url": "",
+          "method": "",
+          "params": {},
+          "header": {},
+          "body": {},
+          "save_keys": [],
+          "expected": {
+            "response_status": "",
+            "body": {}
+          }
+        }
+      ]
+    }
+  ]
+}

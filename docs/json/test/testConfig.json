@@ -8,6 +8,7 @@
       "jobs": [
         {
           "test_name": "sampleSuccess",
+          "try": 1,
           "url": "/path/to/api",
           "method": "POST",
           "params": {

@@ -26,7 +26,8 @@ func (tv TestValidator) ExpectStringEqual(t *testing.T, expected string, actual 
 }
 
 func (tv TestValidator) ExpectNotNilAndSave(t *testing.T, key string) string {
-	value := tv.Response.GetValueFromBody(key)
+	body := tv.Response.ParseBody()
+	value := body[key]
 	assert.NotEqual(t, "", value)
 	return value
 }

@@ -23,7 +23,6 @@ func (tr TestResponse) GetValueFromBody(key string) string {
 }
 
 func (tr TestResponse) ParseBody() map[string]string {
-
 	parsedBody := make(map[string]string)
 	err := json.Unmarshal(tr.Body, &parsedBody)
 	if err != nil {

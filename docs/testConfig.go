@@ -26,13 +26,14 @@ type TestSchema struct {
 
 type SubTestConfig struct {
 	TestName		string				`json:"test_name"`
+	Try				int					`json:"try"`
 	Url				string				`json:"url"`
 	Method			string				`json:"method"`
 	Params			map[string]string	`json:"params"`
 	Header			map[string]string	`json:"header"`
 	Body			json.RawMessage		`json:"body"`
 	SaveKeys		[]string			`json:"save_keys"`
-	Expected		ExpectedResult	`json:"expected"`
+	Expected		ExpectedResult		`json:"expected"`
 }
 
 type ExpectedResult struct {
