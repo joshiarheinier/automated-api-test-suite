@@ -4,25 +4,86 @@
   "port": "",
   "schema": [
     {
-      "test_title": "TestSampleSuccess",
+      "test_title": "TestSample1Success",
       "jobs": [
         {
-          "test_name": "sampleSuccess",
+          "test_name": "sample1Success",
           "try": 1,
-          "url": "/path/to/api",
+          "url": "/v1/testcase/one",
+          "method": "GET",
+          "params": {},
+          "header": {},
+          "body": {},
+          "save_keys": [],
+          "expected": {
+            "response_status": "200",
+            "body": {}
+          }
+        }
+      ]
+    },
+    {
+      "test_title": "TestSample23Success",
+      "jobs": [
+        {
+          "test_name": "sample2Success",
+          "try": 1,
+          "url": "/v1/testcase/two",
           "method": "POST",
-          "params": {
-            "foo": "bar"
-          },
+          "params": {},
           "header": {
-            "foo": "bar"
+            "Content-Type" : "application/json"
           },
           "body": {
-            "foo": "bar"
+            "name" : "Joshia"
+          },
+          "save_keys": ["nextId"],
+          "expected": {
+            "response_status": "200",
+            "body": {}
+          }
+        },
+        {
+          "test_name": "sample3Success",
+          "try": 1,
+          "url": "/v1/testcase/three",
+          "method": "POST",
+          "params": {},
+          "header": {
+            "Content-Type" : "application/x-www-form-urlencoded"
+          },
+          "body": {
+            "name" : "Joshia",
+            "nextId" : "%nextId%"
           },
           "save_keys": [],
           "expected": {
-            "response_status": "",
+            "response_status": "200",
+            "body": {
+              "status" : "SUCCESS"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "test_title": "TestSample3NoNextId",
+      "jobs": [
+        {
+          "test_name": "sample3NoNextId",
+          "try": 1,
+          "url": "/v1/testcase/three",
+          "method": "POST",
+          "params": {},
+          "header": {
+            "Content-Type" : "application/json"
+          },
+          "body": {
+            "name" : "Joshia"
+          },
+          "save_keys": [],
+          "expected": {
+            "response_status": "400",
             "body": {}
           }
         }

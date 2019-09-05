@@ -11,6 +11,7 @@ type TestResponse struct {
 	Body	[]byte
 }
 
+//For GetValueFromBody, only string values are retrievable for now
 func (tr TestResponse) GetValueFromBody(key string) string {
 	res := ""
 	tmp := string(tr.Body)
@@ -22,6 +23,7 @@ func (tr TestResponse) GetValueFromBody(key string) string {
 	return res
 }
 
+//For ParseBody, only 1 level JSON body with any key:value pairs with no nested is parsable
 func (tr TestResponse) ParseBody() map[string]string {
 	parsedBody := make(map[string]string)
 	err := json.Unmarshal(tr.Body, &parsedBody)

@@ -1,36 +1,41 @@
 package controllers
 
 import (
+	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 )
 
 func ControlOne(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"Case" : "One",
-		"Status" : "SUCCESS",
+		"case" : "One",
+		"status" : "SUCCESS",
 	})
 }
 
 func ControlTwo(c *gin.Context) {
-	name := c.PostForm("name")
+	tmp := make(map[string]string)
+	body, _ := ioutil.ReadAll(c.Request.Body)
+	json.Unmarshal(body, &tmp)
 	c.JSON(200, gin.H{
-		"Case" : "Two",
-		"nextId" : name,
-		"Status" : "SUCCESS",
+		"case" : "Two",
+		"nextId" : tmp["name"],
+		"status" : "SUCCESS",
 	})
 }
 
 func ControlThree(c *gin.Context) {
-	name := c.PostForm("name")
-	nextId := c.PostForm("nextId")
-	if name == nextId {
+	tmp := make(map[string]string)
+	body, _ := ioutil.ReadAll(c.Request.Body)
+	json.Unmarshal(body, &tmp)
+	if tmp["name"] == tmp["nextId"] {
 		c.JSON(200, gin.H{
-			"Case" : "Three",
-			"Status" : "SUCCESS",
+			"case" : "Three",
+			"status" : "SUCCESS",
 		})
 	} else {
 		c.JSON(400, gin.H{
-			"Message" : "Invalid nextId",
+			"message" : "Invalid nextId",
 		})
 	}
 }
