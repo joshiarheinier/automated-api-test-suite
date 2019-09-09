@@ -40,7 +40,9 @@
           "save_keys": ["nextId"],
           "expected": {
             "response_status": "200",
-            "body": {}
+            "body": {
+              "status" : "1"
+            }
           }
         },
         {
@@ -84,6 +86,25 @@
           "save_keys": [],
           "expected": {
             "response_status": "400",
+            "body": {}
+          }
+        }
+      ]
+    },
+    {
+      "test_title": "TestSample4No200",
+      "jobs": [
+        {
+          "test_name": "sample2No200",
+          "try": 1,
+          "url": "/foo/bar",
+          "method": "GET",
+          "params": {},
+          "header": {},
+          "body": {},
+          "save_keys": [],
+          "expected": {
+            "response_status": "!200",
             "body": {}
           }
         }

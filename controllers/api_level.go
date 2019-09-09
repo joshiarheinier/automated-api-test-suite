@@ -20,7 +20,7 @@ func ControlTwo(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"case" : "Two",
 		"nextId" : tmp["name"],
-		"status" : "SUCCESS",
+		"status" : 1,
 	})
 }
 

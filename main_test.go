@@ -15,7 +15,7 @@ func TestAPIFlow(t *testing.T)  {
 	controllers.SetUpRouter(ex.R)
 	testConfig := docs.New()
 	for _, schema := range testConfig.Schema {
-		storedData := make(map[string]string)
+		storedData := make(map[string]interface{})
 		for _, job := range schema.Jobs {
 			tmp, _ := job.Body.MarshalJSON()
 			stringBody := new(bytes.Buffer)

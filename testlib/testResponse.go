@@ -2,8 +2,6 @@ package testlib
 
 import (
 	"encoding/json"
-	"log"
-	"strings"
 )
 
 type TestResponse struct {
@@ -11,24 +9,31 @@ type TestResponse struct {
 	Body	[]byte
 }
 
-//For GetValueFromBody, only string values are retrievable for now
-func (tr TestResponse) GetValueFromBody(key string) string {
-	res := ""
-	tmp := string(tr.Body)
-	idx := strings.Index(tmp, key) + len(key) + 3
-	for string(tmp[idx]) != `"` {
-		res += string(tmp[idx])
-		idx += 1
-	}
-	return res
-}
 
-//For ParseBody, only 1 level JSON body with any key:value pairs with no nested is parsable
-func (tr TestResponse) ParseBody() map[string]string {
-	parsedBody := make(map[string]string)
+func (tr TestResponse) ParseBody() (map[string]interface{}, error) {
+
+	parsedBody := make(map[string]interface{})
 	err := json.Unmarshal(tr.Body, &parsedBody)
 	if err != nil {
-		log.Fatalf("Failed to encode response body: %v\n", err)
+		return nil, err
 	}
-	return parsedBody
+	return parsedBody, nil
+}
+
+func (tr TestResponse) RetrieveValueFromBody(key string, body interface{}) interface{} {
+	switch body.(type) {
+	case map[string]interface{}:
+		if body.(map[string]interface{})[key] != nil {
+			return body.(map[string]interface{})[key]
+		} else {
+			for _, v := range body.(map[string]interface{}) {
+				return tr.RetrieveValueFromBody(key, v)
+			}
+		}
+	case []interface{}:
+		for _, v := range body.([]interface{}) {
+			return tr.RetrieveValueFromBody(key, v)
+		}
+	}
+	return nil
 }

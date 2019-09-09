@@ -26,13 +26,13 @@ func (te *TestExecutor) Flush()  {
 	te.W = httptest.NewRecorder()
 }
 
-func (te TestExecutor) CheckHeader(header map[string]string, storedData map[string]string) {
+func (te TestExecutor) CheckHeader(header map[string]string, storedData map[string]interface{}) {
 	for k, v := range header {
 		values := strings.Split(v, "%")
 		if len(values) > 1 {
 			for i, e := range values {
 				if i % 2 != 0 {
-					values[i] = storedData[e]
+					values[i] = storedData[e].(string)
 				}
 			}
 			newValue := ""
@@ -44,13 +44,13 @@ func (te TestExecutor) CheckHeader(header map[string]string, storedData map[stri
 	}
 }
 
-func (te TestExecutor) CheckBody(body []byte, storedData map[string]string) []byte {
+func (te TestExecutor) CheckBody(body []byte, storedData map[string]interface{}) []byte {
 	strBody := string(body)
 	values := strings.Split(strBody, "%")
 	if len(values) > 1 {
 		for i, e := range values {
 			if i % 2 != 0 {
-				values[i] = storedData[e]
+				values[i] = storedData[e].(string)
 			}
 		}
 		newValue := ""
