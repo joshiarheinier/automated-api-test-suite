@@ -14,26 +14,27 @@ type TestValidator struct {
 func (tv TestValidator) ExpectResponseStatus(t *testing.T, status string) {
 	s := strconv.Itoa(tv.Response.StatusCode)
 	if string(status[0]) == "!" {
-		tv.ExpectStringNotEqual(t, status[1:], s)
+		tv.ExpectValueNotEqual(t, status[1:], s)
 	} else {
-		tv.ExpectStringEqual(t, status, s)
+		tv.ExpectValueEqual(t, status, s)
 	}
 }
 
-func (tv TestValidator) ExpectBody(t *testing.T, body map[string]string)  {
+func (tv TestValidator) ExpectBody(t *testing.T, body map[string]interface{})  {
 	for k, v := range body {
 		val := tv.Response.RetrieveValueFromBody(k, body)
 		if val != nil {
-			tv.ExpectStringEqual(t, v, val.(string))
+			assert.IsType(t, v, val)
+			tv.ExpectValueEqual(t, v, val)
 		}
 	}
 }
 
-func (tv TestValidator) ExpectStringEqual(t *testing.T, expected string, actual string)  {
+func (tv TestValidator) ExpectValueEqual(t *testing.T, expected interface{}, actual interface{})  {
 	assert.Equal(t, expected, actual)
 }
 
-func (tv TestValidator) ExpectStringNotEqual(t *testing.T, expected string, actual string)  {
+func (tv TestValidator) ExpectValueNotEqual(t *testing.T, expected interface{}, actual interface{})  {
 	assert.NotEqual(t, expected, actual)
 }
 

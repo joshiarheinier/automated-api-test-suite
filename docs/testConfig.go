@@ -37,8 +37,8 @@ type SubTestConfig struct {
 }
 
 type ExpectedResult struct {
-	Status	string				`json:"response_status"`
-	Body	map[string]string	`json:"body"`
+	Status	string					`json:"response_status"`
+	Body	map[string]interface{}	`json:"body"`
 }
 
 var TestConfigData  = &TestConfiguration{}
